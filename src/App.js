@@ -1,58 +1,24 @@
-import React, { Component } from "react";
-import Layout from "./containers/Base/Layout";
-import Routes from "./Routes";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
-import Login from "./containers/Accounts/Login";
-import Signup from "./containers/Accounts/Signup";
-import "react-toastify/dist/ReactToastify.css";
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-class App extends Component {
-  state = {
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>Bye there!</p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
 
-    isAuthenticated: true,
-  };
-
-  componentDidMount() {
-    // console.log("componentDidMount in App");
-
-    if (localStorage.getItem("user-token") !== null) {
-      console.log('tem user-token')
-    } else {
-      this.setState({ isAuthenticated: false });
-    }
-  }
-  render() {
-    let routes = (
-      <Switch>
-        <Layout>
-        <Route
-            path="/login/"
-            render={() => (
-              <Redirect to={`/onepage/`} />
-            )}
-          />
-           <Route
-            exact
-            path="/"
-            render={() => (
-              <Redirect to={`/onepage/`} />
-            )}
-          />
-          <Route path="/*" component={Routes} />
-        </Layout>
-      </Switch>
-    );
-
-    if (!this.state.isAuthenticated) {
-      routes = (
-        <Switch>
-          <Route path="/login/" component={Login} />
-          <Route path="/signup/" component={Signup} />
-          <Route path="/*" render={() => <Redirect to="/login/" />} />
-        </Switch>
-      );
-    }
-
-    return <BrowserRouter>{routes}</BrowserRouter>;
-  }}
-export default App
+export default App;
