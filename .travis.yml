@@ -10,3 +10,14 @@ before_install:
 script:
   - docker run -e CI=true vikram0207/hwrfrontend npm run test
 
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-2'
+  app: 'dockerapp'
+  env: 'docker-env'
+  bucket_name: 'elasticbeanstalk-us-east-2-585577319282'
+  bucket_path: 'dockerapp'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
